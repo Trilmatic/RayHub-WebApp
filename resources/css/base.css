@@ -1,0 +1,93 @@
+body{
+    @apply text-black dark:text-white;
+    font-family: 'Lato', sans-serif;
+}
+
+a.link{
+  @apply font-medium text-primary hover:text-primary-focus hover:underline;
+}
+
+.separator{
+    @apply w-full border-b border-gray-300 dark:border-gray-700;
+}
+
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+  @apply w-2 h-2
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-gray-200;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400
+}
+
+/* Scroll bar stylings dark */
+.dark ::-webkit-scrollbar {
+  @apply w-2 h-2
+}
+
+/* Track */
+.dark ::-webkit-scrollbar-track {
+  @apply bg-slate-800;
+}
+
+/* Handle */
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-slate-600;
+}
+
+/* Handle on hover */
+.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-700
+}
+
+hr{
+  @apply h-px my-8 bg-gray-200 border-0 dark:bg-gray-700;
+}
+
+blockquote {
+  @apply text-xl italic font-semibold text-gray-900 dark:text-white;
+}
+
+h1{
+  @apply text-5xl font-extrabold dark:text-white;
+}
+
+h2{
+  @apply text-4xl font-bold dark:text-white;
+}
+
+h3{
+  @apply text-3xl font-bold dark:text-white;
+}
+
+h4{
+  @apply text-2xl font-bold dark:text-white;
+}
+
+h5{
+  @apply text-xl font-bold dark:text-white;
+}
+
+h6{
+  @apply text-lg font-bold dark:text-white;
+}
+
+/* Scrollbar styles */
+.is-scrollbar-hidden {
+  @apply [scrollbar-width:none]; /* Firefox */
+}
+
+.is-scrollbar-hidden::-webkit-scrollbar {
+  @apply hidden;
+}

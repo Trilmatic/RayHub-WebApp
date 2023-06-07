@@ -1,0 +1,47 @@
+.alert-container{
+    @apply fixed bottom-2 right-2 max-w-md w-full;
+}
+
+.alert {
+    @apply flex relative p-4 pb-5 mb-4 text-sm border rounded-lg overflow-hidden bg-white dark:bg-slate-800;
+}
+
+.alert.alert-default{
+    @apply text-success border-success-focus dark:text-success dark:border-success-focus;
+}
+
+.alert.alert-success{
+    @apply text-success border-success-focus dark:text-success dark:border-success-focus;
+}
+
+.alert.alert-error{
+    @apply text-error border-error-focus dark:text-error dark:border-error-focus;
+}
+
+.alert .close-button{
+    @apply ml-auto -mx-1.5 -my-1.5 bg-slate-100 rounded-lg focus:ring-2 p-1.5 hover:bg-slate-200 inline-flex h-8 w-8 dark:bg-slate-800 dark:hover:bg-slate-700;
+}
+
+.alert.alert-success .close-button{
+    @apply text-success;
+}
+
+.alert.alert-error .close-button{
+    @apply text-error;
+}
+
+.alert .counter{
+    @apply absolute bottom-0 left-0 w-full h-2 bg-gray-400/40;
+}
+
+.alert .time-left{
+    @apply absolute bottom-0 left-0 h-2 transition-all duration-100;
+}
+
+.alert.alert-error .time-left{
+    @apply bg-error-focus/50;
+}
+
+.alert.alert-success .time-left{
+    @apply bg-success-focus/50;
+}

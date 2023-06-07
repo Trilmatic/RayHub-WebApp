@@ -1,0 +1,19 @@
+.pagination {
+    @apply list-none flex space-x-1 p-0;
+}
+
+.pagination .pagination-link {
+    @apply bg-info hover:bg-info-focus;
+}
+
+.pagination .pagination-no-link {
+    @apply px-2 h-8 ml-0 leading-tight text-gray-500 dark:text-gray-400;
+}
+
+.pagination .pagination-link.active {
+    @apply bg-primary dark:bg-primary;
+}
+
+.pagination .pagination-link.disabled {
+    @apply bg-slate-300/40 dark:bg-slate-700/40 hover:cursor-not-allowed;
+}

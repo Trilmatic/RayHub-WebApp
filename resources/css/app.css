@@ -1,7 +1,21 @@
+@import './base.css';
+@import './forms.css';
+
+/* Components */
+@import './components/alert.css';
+@import './components/card.css';
+@import './components/table.css';
+@import './components/tabs.css';
+@import './components/tooltip.css';
+@import './components/button.css';
+@import './components/markdown.css';
+@import './components/pagination.css';
+@import './components/tom-select.css';
+@import './components/flatpickr.css';
+@import './components/navigation.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-[x-cloak] {
-    display: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');

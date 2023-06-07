@@ -1,0 +1,16 @@
+@import 'flatpickr/dist/flatpickr.min.css';
+@import 'flatpickr/dist/themes/airbnb.css';
+
+.dark .flatpickr-calendar {
+    @apply bg-slate-700 text-white;
+}
+
+.dark .flatpickr-time input:hover,
+.dark .flatpickr-time .flatpickr-am-pm:hover,
+.dark .flatpickr-time input:focus {
+    @apply bg-slate-600 text-white;
+}
+
+.dark .flatpickr-time input {
+    @apply text-white;
+}

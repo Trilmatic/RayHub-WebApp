@@ -1,0 +1,19 @@
+.card{
+    @apply w-full p-4 shadow-xl bg-slate-200 dark:bg-slate-800 rounded-2xl;
+}
+
+.card.error{
+    @apply border border-error bg-error-focus/20;
+}
+
+.card-indicator{
+    @apply w-2 h-3 dark:bg-slate-700/50 bg-slate-400/50 rounded transition-all duration-500;
+}
+
+.card-indicator.active{
+    @apply w-2 h-3 dark:bg-slate-200/50 bg-slate-800/50 rounded;
+}
+
+.movie-card{
+    @apply shadow-xl bg-slate-200 dark:bg-slate-800 rounded-2xl w-52 shrink-0 m-0 p-0 bg-gradient-to-b from-slate-500 to-black;
+}
