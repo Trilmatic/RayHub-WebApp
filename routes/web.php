@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Movies\ImportController as MoviesImportController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,10 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [PagesController::class, 'welcome'])->name('welcome');
+Route::get(
+    '/import',
+    MoviesImportController::class
+)->name('import');
 
 Route::middleware([
     'auth:sanctum',

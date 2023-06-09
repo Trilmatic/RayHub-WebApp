@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('movie_genres', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('tmdb_id')->unique()->index();
-            $table->string('name');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('movie_genres_pivots', function (Blueprint $table) {
+            $table->foreign('movie_genre_tmdb_id')->references('tmdb_id')->on('movie_genres')->onDelete('CASCADE');
+            $table->foreign('movie_tmdb_id')->references('tmdb_id')->on('movies')->onDelete('CASCADE');
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('movie_genres');
+        //
     }
 };
