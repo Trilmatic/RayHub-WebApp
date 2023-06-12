@@ -13,12 +13,16 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpsertColumns;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class MoviesImport implements ToModel, WithChunkReading, WithBatchInserts, WithUpserts, WithUpsertColumns, WithHeadingRow, ShouldQueue
+class MoviesImport implements ToModel, WithChunkReading, SkipsEmptyRows, WithBatchInserts, WithUpserts, WithUpsertColumns, WithHeadingRow, ShouldQueue, WithValidation
 {
+    use SkipsFailures;
 
-    //use SkipsFailures;
+    public $tries = 2;
+    public $timeout = 120;
     /**
      * @param array $row
      *
@@ -48,36 +52,26 @@ class MoviesImport implements ToModel, WithChunkReading, WithBatchInserts, WithU
         foreach ($genres as $genre) {
             $genre_record = MovieGenre::where('name', $genre);
             if ($genre_record->exists()) {
-                $pivot = MovieGenresPivot::where([['genre_tmdb_id', $genre_record->id], ['movie_tmdb_id', $movie->id]]);
-                if (!$pivot->exists()) {
-                    new MovieGenresPivot([
-                        'genre_tmdb_id' => $genre_record->id,
-                        'movie_tmdb_id' => $movie->id,
-                    ]);
-                }
+                $pivots = MovieGenresPivot::where('movie_tmdb_id', $movie->id)->all();
+                $pivots->delete();
+                new MovieGenresPivot([
+                    'genre_tmdb_id' => $genre_record->id,
+                    'movie_tmdb_id' => $movie->id,
+                ]);
             }
         }
 
         return $movie;
     }
 
-    /*public function rules(): array
-    {
-        return [
-            'title' => [
-                'required',
-            ],
-        ];
-    }*/
-
     public function chunkSize(): int
     {
-        return 10000;
+        return 2500;
     }
 
     public function batchSize(): int
     {
-        return 2000;
+        return 2500;
     }
 
     public function uniqueBy()
@@ -88,5 +82,14 @@ class MoviesImport implements ToModel, WithChunkReading, WithBatchInserts, WithU
     public function upsertColumns()
     {
         return ['popularity', 'runtime', 'overview', 'status', 'release_date', 'tagline', 'vote_average', 'vote_count', 'poster_path', 'backdrop_path'];
+    }
+
+    public function rules(): array
+    {
+        return [
+            'title' => [
+                'required',
+            ],
+        ];
     }
 }

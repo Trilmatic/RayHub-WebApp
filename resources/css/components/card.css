@@ -15,5 +15,5 @@
 }
 
 .movie-card{
-    @apply shadow-xl bg-slate-200 dark:bg-slate-800 rounded-2xl w-52 shrink-0 m-0 p-0 bg-gradient-to-b from-slate-500 to-black;
+    @apply shadow-xl relative bg-slate-200 dark:bg-slate-800 rounded-2xl w-52 shrink-0 m-0 p-0 bg-gradient-to-b from-slate-500 to-black;
 }

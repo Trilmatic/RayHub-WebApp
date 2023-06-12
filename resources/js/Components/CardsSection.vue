@@ -1,6 +1,7 @@
 <script setup>
 import ChevronRight from "@/Components/Icons/ChevronRight.vue";
 import ChevronLeft from "@/Components/Icons/ChevronLeft.vue";
+import MovieCard from "@/Components/MovieCard.vue";
 
 import { nextTick, onMounted, ref, watch } from "vue";
 
@@ -15,14 +16,6 @@ const cardWidth = ref(224);
 const areaWidth = ref(0);
 const scrollWidth = ref(0);
 const areaFocused = ref(false);
-
-watch(
-  () => props.list,
-  (newList, oldList) => {
-    scrollWidth.value = newList.length * cardWidth.value;
-    updateIndicatiors();
-  }
-);
 
 const initScroll = async () => {
   await nextTick();
@@ -85,7 +78,9 @@ const moveLeft = (event) => {
 };
 
 onMounted(() => {
+  scrollWidth.value = props.list.length * cardWidth.value;
   initScroll();
+  updateIndicatiors();
 });
 </script>
 <template>
@@ -107,18 +102,7 @@ onMounted(() => {
       @mouseover="areaFocused = true"
       @mouseout="areaFocused = false"
     >
-      <div
-        class="movie-card"
-        :id="'card-item-' + item.id"
-        v-for="item in list"
-        :key="item.id"
-      >
-        <img
-          v-show="item.poster_path"
-          class="w-full h-full rounded-xl"
-          :src="'http://image.tmdb.org/t/p/w300/' + item.poster_path"
-        />
-      </div>
+      <MovieCard v-for="item in list" :key="item.id" :item="item" />
     </div>
     <div
       class="absolute z-10 left-0 top-1/2 -translate-y-1/2 h-full flex flex-col justify-center items-center bg-gradient-to-l from-transparent to-slate-200 dark:to-slate-800"

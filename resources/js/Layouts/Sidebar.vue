@@ -6,12 +6,40 @@ import { Link } from "@inertiajs/vue3";
     <div
       class="rounded-lg shadow bg-slate-200 dark:bg-slate-800 h-full flex flex-col justify-between p-2 min-h-[calc(100vh-2rem)]"
     >
-      <div class=""></div>
+      <div class="">
+        <slot></slot>
+      </div>
       <div class="side-nav">
         <Link
           href="#"
           class="nav-link active has-tooltip"
-          data-tippy-content="MOVIES"
+          data-tippy-content="My Collection"
+          data-tippy-placement="right"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-archive"
+            width="34"
+            height="34"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path
+              d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
+            ></path>
+            <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10"></path>
+            <path d="M10 12l4 0"></path>
+          </svg>
+        </Link>
+        <Link
+          href="#"
+          class="nav-link has-tooltip"
+          data-tippy-content="Movies"
           data-tippy-placement="right"
         >
           <svg
@@ -42,7 +70,7 @@ import { Link } from "@inertiajs/vue3";
         <Link
           href="#"
           class="nav-link has-tooltip"
-          data-tippy-content="TV SHOWS"
+          data-tippy-content="TV Shows"
           data-tippy-placement="right"
         >
           <svg
@@ -67,33 +95,7 @@ import { Link } from "@inertiajs/vue3";
         <Link
           href="#"
           class="nav-link has-tooltip"
-          data-tippy-content="STREAMING"
-          data-tippy-placement="right"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-box-seam"
-            width="34"
-            height="34"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9l8 -4.5"></path>
-            <path d="M12 12l8 -4.5"></path>
-            <path d="M8.2 9.8l7.6 -4.6"></path>
-            <path d="M12 12v9"></path>
-            <path d="M12 12l-8 -4.5"></path>
-          </svg>
-        </Link>
-        <Link
-          href="#"
-          class="nav-link has-tooltip"
-          data-tippy-content="SETTINGS"
+          data-tippy-content="Settings"
           data-tippy-placement="right"
         >
           <svg
