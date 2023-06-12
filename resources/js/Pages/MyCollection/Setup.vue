@@ -161,11 +161,6 @@ onMounted(() => {
           </form>
         </div>
       </div>
-
-      <video width="320" height="240" controls>
-        <source src="/play" />
-      </video>
-
     </div>
   </Layout>
 </template>

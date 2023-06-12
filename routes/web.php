@@ -43,7 +43,10 @@ Route::middleware([
 
     Route::get('/play', function () {
         $path = "z:/Harry Potter a Ohnivý Pohár.mkv";
-
         VideoStreamer::streamFile($path);
     });
+
+    Route::get('/play/test', function () {
+        return Inertia::render('MyCollection/PlayVideo');
+    })->name('testplay');
 });
