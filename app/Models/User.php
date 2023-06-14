@@ -58,4 +58,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function sources()
+    {
+        return $this->hasMany(Source::class);
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(SourceFile::class)->where('is_video', true);
+    }
 }

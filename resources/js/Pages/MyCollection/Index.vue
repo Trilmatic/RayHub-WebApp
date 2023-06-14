@@ -6,8 +6,7 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 
 defineProps({
-  movie_genres: Array,
-  movies: Array,
+  videos: Array,
 });
 </script>
 
@@ -15,7 +14,16 @@ defineProps({
   <Layout>
     <Head title="Welcome" />
     <div class="py-6">
-      <div class="grid"></div>
+      <div class="grid gap-4">
+        <Link
+          :href="route('my-collection.play', video.hash)"
+          class=""
+          v-for="video in videos"
+          :key="video.id"
+        >
+          {{ video.path }}</Link
+        >
+      </div>
     </div>
   </Layout>
 </template>

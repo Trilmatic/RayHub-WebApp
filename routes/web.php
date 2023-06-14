@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Movies\ImportController as MoviesImportController;
+use App\Http\Controllers\MyCollection\ActionsController as MyCollectionActionsController;
 use App\Http\Controllers\MyCollection\PagesController as MyCollectionPagesController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Foundation\Application;
@@ -37,16 +38,11 @@ Route::middleware([
     })->name('dashboard');
 
     Route::prefix('my-collection')->name('my-collection.')->group(function () {
-        Route::get('/setup', [MyCollectionPagesController::class, 'index'])->name('index');
-        Route::post('/scan', [MyCollectionPagesController::class, 'scan'])->name('scan');
+        Route::get('/', [MyCollectionPagesController::class, 'index'])->name('index');
+        Route::get('/setup', [MyCollectionPagesController::class, 'setup'])->name('setup');
+        Route::post('/scan', [MyCollectionActionsController::class, 'scan'])->name('scan');
+        Route::get('/play/{hash}', [MyCollectionPagesController::class, 'play'])->name('play');
+        Route::get('/source/{hash}', [MyCollectionActionsController::class, 'source'])->name('source');
     });
 
-    Route::get('/play', function () {
-        $path = "z:/Harry Potter a Ohnivý Pohár.mkv";
-        VideoStreamer::streamFile($path);
-    });
-
-    Route::get('/play/test', function () {
-        return Inertia::render('MyCollection/PlayVideo');
-    })->name('testplay');
 });

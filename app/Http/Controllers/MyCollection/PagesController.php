@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\MyCollection;
 
+use App\Models\Source;
+use App\Processes\Queries\GetCollectionVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
@@ -10,35 +12,24 @@ final class PagesController
 {
     public function index(Request $request)
     {
-        return Inertia::render('MyCollection/Setup', [
-            'folders' => []
+        return Inertia::render('MyCollection/Index', [
+            'videos' => $request->user()->videos()->orderBy('name', 'desc')->get()
         ]);
     }
 
-    public function scan(Request $request)
+    public function setup(Request $request)
     {
-        $folder = $request->get('folder');
-        $folderType = $request->get('folderType');
-
-        $folderCollection = collect(
-            [
-                'path' => $folder,
-                'type' => $folderType,
-            ]
-        );
-
-        //dd($folder);
-
-        if ($entries = scandir($folder)) {
-            $folderCollection->put('entries', array_diff($entries, array('.', '..')));
-        }
-
         return Inertia::render('MyCollection/Setup', [
-            'folders' => [$folderCollection->toArray()]
+            'sources' => $request->user()->sources()->with('videos')->withCount('other_files')->get()
         ]);
     }
 
-    public function play(Request $request)
+    public function play(Request $request, $hash)
     {
+        $handler = new GetCollectionVideo();
+        $video = $handler->handle($hash);
+        return Inertia::render('MyCollection/PlayVideo', [
+            'video' => $video
+        ]);
     }
 }

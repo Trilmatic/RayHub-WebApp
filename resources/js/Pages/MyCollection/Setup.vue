@@ -6,12 +6,13 @@ import axios from "axios";
 import { computed, onMounted, reactive, ref } from "vue";
 
 const props = defineProps({
-  folders: Array,
+  sources: Array,
 });
 
 const form = reactive({
-  folder: "",
-  folderType: "movies",
+  path: "",
+  sourceType: "local",
+  contentType: "movies",
 });
 
 const submit = () => {
@@ -19,7 +20,7 @@ const submit = () => {
 };
 
 onMounted(() => {
-  console.log(props.folders);
+  console.log(props.sources);
 });
 </script>
 
@@ -33,7 +34,11 @@ onMounted(() => {
             Setup collection sources
           </h2>
           <div class="flex justify-center space-x-4 py-4">
-            <div class="card">
+            <div
+              class="card hover:cursor-pointer hover:bg-primary-focus transition-colors"
+              :class="{ active: form.sourceType === 'local' }"
+              @click="form.sourceType = 'local'"
+            >
               <h3 class="font-bold">Local network</h3>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +71,11 @@ onMounted(() => {
                 ></path>
               </svg>
             </div>
-            <div class="card">
+            <div
+              class="card hover:cursor-pointer hover:bg-primary-focus transition-colors"
+              :class="{ active: form.sourceType === 'http' }"
+              @click="form.sourceType = 'http'"
+            >
               <h3 class="font-bold">Online</h3>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -91,13 +100,13 @@ onMounted(() => {
           </div>
           <form class="card" @submit.prevent="submit">
             <h3 class="mb-2 font-semibold text-gray-900 dark:text-white">
-              Folder URL
+              Folder URL/Path
             </h3>
             <input
               class="form-input mb-4"
               type="text"
               placeholder="Folder URL"
-              v-model="form.folder"
+              v-model="form.path"
             />
             <h3 class="mb-2 font-semibold text-gray-900 dark:text-white">
               Folder content
@@ -110,7 +119,7 @@ onMounted(() => {
                   checked
                   value="movies"
                   name="folder-type"
-                  v-model="form.folderType"
+                  v-model="form.contentType"
                   class="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary dark:focus:ring-primary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label
@@ -125,7 +134,7 @@ onMounted(() => {
                   type="radio"
                   value="tv"
                   name="folder-type"
-                  v-model="form.folderType"
+                  v-model="form.contentType"
                   class="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary dark:focus:ring-primary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label
@@ -159,6 +168,20 @@ onMounted(() => {
               ><span class="ml-1">Scan</span>
             </button>
           </form>
+
+          <ul
+            class="w-full text-sm font-medium text-gray-900 bg-slate-200 border border-gray-200 rounded-lg dark:bg-slate-800 dark:border-gray-600 dark:text-white mt-4"
+          >
+            <li
+              v-for="source in sources"
+              :key="source.id"
+              class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+            >
+              {{ source.path }}
+
+              <span class="p-1 bg-success" v-if=" source.other_files_count > 0">{{ source.other_files_count }}</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
